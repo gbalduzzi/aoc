@@ -1,44 +1,47 @@
-import { readFile } from 'fs/promises'
+import { readFile } from "fs/promises";
 
-export const read = async (path: string) => (await readFile(path)).toString();
+export const read = async (path: string): Promise<string> =>
+  (await readFile(path)).toString();
 
 /*
  * Atomic operations
  */
 
-export const toLines = (content: string) => content.split("\n")
+export const toLines = (content: string) => content.split("\n");
 
-export const toWords = (line: string) => line.split(' ').filter(w => w.length > 0)
+export const toWords = (line: string) =>
+  line.split(" ").filter((w) => w.length > 0);
 
-export const toInts = (line: string) => line.split(' ').filter(w => w.length > 0).map(w => parseInt(w, 10))
+export const toInts = (line: string) =>
+  line
+    .split(" ")
+    .filter((w) => w.length > 0)
+    .map((w) => parseInt(w, 10));
 
-export const toChars = (line: string) => line.split('')
+export const toChars = (line: string) => line.split("");
 
 /*
  * All-in-one utils
  */
 
-
-export const fileToLines = async (
-    path: string, 
-): Promise<Array<string>> => {
-    return toLines(await read(path))
-}
+export const fileToLines = async (path: string): Promise<Array<string>> => {
+  return toLines(await read(path));
+};
 
 export const fileToWords = async (
-    path: string, 
+  path: string
 ): Promise<Array<Array<string>>> => {
-    return toLines(await read(path)).map(toWords)
-}
+  return toLines(await read(path)).map(toWords);
+};
 
 export const fileToInts = async (
-    path: string, 
+  path: string
 ): Promise<Array<Array<number>>> => {
-    return toLines(await read(path)).map(toInts)
-}
+  return toLines(await read(path)).map(toInts);
+};
 
 export const fileToChars = async (
-    path: string, 
+  path: string
 ): Promise<Array<Array<string>>> => {
-    return toLines(await read(path)).map(toChars)
-}
+  return toLines(await read(path)).map(toChars);
+};
