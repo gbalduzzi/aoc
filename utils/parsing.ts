@@ -18,6 +18,9 @@ export const toInts = (line: string) =>
     .filter((w) => w.length > 0)
     .map((w) => parseInt(w, 10));
 
+export const toDigits = (line: string) =>
+  toChars(line).map((d) => parseInt(d, 10));
+
 export const toChars = (line: string) => line.split("");
 
 /*
@@ -38,6 +41,12 @@ export const fileToInts = async (
   path: string
 ): Promise<Array<Array<number>>> => {
   return toLines(await read(path)).map(toInts);
+};
+
+export const fileToDigits = async (
+  path: string
+): Promise<Array<Array<number>>> => {
+  return toLines(await read(path)).map(toDigits);
 };
 
 export const fileToChars = async (
